@@ -103,8 +103,8 @@ void menu(){
   char diretorioArquivoEntrada[TAM_DIRNAME] = INPUT_DIR;
   char nomeArquivo[TAM_FILENAME];
   int criptografar, apagarOriginal=false, logicaCesar=true;
-  unsigned chave;   /* lógica de deslocamento. */
-  char chave2;      /* lógica da Cifra de César. */
+  unsigned short chave; /* lógica de deslocamento. */
+  char chave2;          /* lógica da Cifra de César. */
 
   cout << endl << ">> Nome do arquivo a ser criptografado em " << INPUT_DIR;
   readString(nomeArquivo, TAM_FILENAME);
@@ -112,11 +112,11 @@ void menu(){
 
   if(!strcmp(diretorioArquivoEntrada, OUTPUT_DIR)){ printf("\n\t Renomeie o arquivo de entrada!\n\n"); system("pause"); exit(1); }
 
-  cout << ">> Opcao de criptografia  (0 = SHIFT): ";        cin >> logicaCesar;
-  cout << ">> Criptografar?          (0 = NAO)  : ";        cin >> criptografar;
-  cout << ">> Apagar original?       (0 = NAO)  : ";        cin >> apagarOriginal;
-  if(!logicaCesar){ cout << ">> Chave (numero): ";   cin >> chave;  }
-  else{             cout << ">> Chave (letra) : ";   cin >> chave2; chave = toupper(chave2); }
+  cout << ">> Opcao de criptografia  (0 = SHIFT): "; cin >> logicaCesar;
+  cout << ">> Criptografar?          (0 = NAO)  : "; cin >> criptografar;
+  cout << ">> Apagar original?       (0 = NAO)  : "; cin >> apagarOriginal;
+  if(!logicaCesar){ cout << ">> Chave (numero)  : "; cin >> chave;  }
+  else{             cout << ">> Chave (letra)   : "; cin >> chave2; chave = toupper(chave2); }
 
   process(diretorioArquivoEntrada, criptografar, !logicaCesar, apagarOriginal, chave);
 }
