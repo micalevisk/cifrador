@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fstream>
+#include <limits.h>
 using namespace std;
 
 #define TAM_FILENAME 30 /* Limit number of characters in input filename. */
@@ -17,22 +18,22 @@ using namespace std;
 #define INPUT_DIR  "C:\\Users\\user\\desktop\\"
 #define OUTPUT_DIR "C:\\Users\\user\\desktop\\cript.txt"
 
-/* 4.294.967.296  (=2^32) key options (shift logic). */
-/*    67.108.864  (=2^26)  key options (Cesar logic). */
-#define MAIOR_CHAVE1 4294967295
-#define MAIOR_CHAVE2 67108864
+/* 65.536 (=2^16)               valid key   (shift logic). */
+/*     26 (alphabet characters) key options (Cesar logic). */
+#define MAIOR_CHAVE1 USHRT_MAX
+#define MAIOR_CHAVE2 25
 
 //////////////////FUNCTIONS/////////////////////////////////////////////////////////////////////////////
 void readString(char stringVar[], int tamanho);
-void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* caractere, unsigned chave);
-void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsigned key);
+void criptografarCaracter(bool criptografar, bool logicaCesar, char* caractere, unsigned short chave);
+void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsigned short key);
 void menu(void);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 int main(){
   // setlocale(LC_ALL, "Portuguese");
-  system("title Criptografia de Textos");
+  system("title MiCodier * Criptografia de Textos");
   system("color f3");
 
   menu();
@@ -51,7 +52,7 @@ void readString(char stringVar[], int tamanho) {
 }
 
 
-void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* caractere, unsigned chave){
+void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* caractere, unsigned short chave){
   int charCript;
   char currChar = *caractere;
   short limiteTeto, limiteChao;
@@ -73,7 +74,7 @@ void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* cara
   *caractere = charCript;
 }
 
-void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsigned key){
+void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsigned short key){
   ifstream inputFile;
   ofstream outputFile;
   char currChar;
@@ -101,7 +102,7 @@ void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsi
 void menu(){
   char diretorioArquivoEntrada[TAM_DIRNAME] = INPUT_DIR;
   char nomeArquivo[TAM_FILENAME];
-  int criptografar, apagarOriginal=false, logicaDeslocamento;
+  int criptografar, apagarOriginal=false, logicaCesar=true;
   unsigned chave;   /* lógica de deslocamento. */
   char chave2;      /* lógica da Cifra de César. */
 
@@ -111,11 +112,11 @@ void menu(){
 
   if(!strcmp(diretorioArquivoEntrada, OUTPUT_DIR)){ printf("\n\t Renomeie o arquivo de entrada!\n\n"); system("pause"); exit(1); }
 
-  cout << ">> Opcao de criptografia  (0 = SHIFT): ";        cin >> logicaDeslocamento;
+  cout << ">> Opcao de criptografia  (0 = SHIFT): ";        cin >> logicaCesar;
   cout << ">> Criptografar?          (0 = NAO)  : ";        cin >> criptografar;
   cout << ">> Apagar original?       (0 = NAO)  : ";        cin >> apagarOriginal;
-  if(!logicaDeslocamento){ cout << ">> Chave (numero): ";   cin >> chave;  }
-  else{                    cout << ">> Chave (letra) : ";   cin >> chave2; chave = toupper(chave2);}
+  if(!logicaCesar){ cout << ">> Chave (numero): ";   cin >> chave;  }
+  else{             cout << ">> Chave (letra) : ";   cin >> chave2; chave = toupper(chave2); }
 
-  process(diretorioArquivoEntrada, criptografar, !logicaDeslocamento, apagarOriginal, chave);
+  process(diretorioArquivoEntrada, criptografar, !logicaCesar, apagarOriginal, chave);
 }
