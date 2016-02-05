@@ -151,7 +151,7 @@ void receberTexto(entradaTexto tipo){
 		setbuf(stdin, NULL);
 		printf("\n\nImportando Arquivo...\n");
 
-		arquivo = fopen("c:\\MiCript\\arquivos_originais\\original.txt", "r");
+		arquivo = fopen("c:\\MiCript\\arquivos_originais\\original", "r");
 
 		if (!arquivo) perror("ao abrir file2");
 		else{
@@ -217,6 +217,7 @@ void menuCriptografar(){
 		break;
 
 	case 2:
+		CLS;
 		receberTexto(Arquivo);
 		break;
 
