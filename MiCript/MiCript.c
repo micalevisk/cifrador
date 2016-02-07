@@ -1,7 +1,7 @@
 //
-//	OBS: COMPILAR COM g++
+//  OBS: COMPILAR COM g++
 //  MiCript.c
-//  Created by Micael Levi on 16/02/02.
+//  Created by Micael Levi on 02/02/16.
 //  Copyright (c) 2016 Micael Levi L. Cavalcante. All rights reserved
 //
 
