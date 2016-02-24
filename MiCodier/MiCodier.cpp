@@ -26,7 +26,7 @@ using namespace std;
 //////////////////FUNCTIONS/////////////////////////////////////////////////////////////////////////////
 void readString(char stringVar[], int tamanho);
 void criptografarCaracter(bool criptografar, bool logicaCesar, char* caractere, unsigned short chave);
-void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsigned short key);
+void process(char fileDir[], bool crypt, bool shiftLogic, bool delOriginal, unsigned short key);
 void menu(void);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -74,7 +74,7 @@ void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* cara
   *caractere = charCript;
 }
 
-void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsigned short key){
+void process(char fileDir[], bool crypt, bool shiftLogic, bool delOriginal, unsigned short key){
   ifstream inputFile;
   ofstream outputFile;
   char currChar;
@@ -84,7 +84,7 @@ void process(char fileDir[], bool cript, bool shiftLogic, bool delOriginal, unsi
       outputFile.open(OUTPUT_DIR);
 
       while(inputFile >> noskipws >> currChar){
-          if(isalpha(currChar)) criptografarCaracter(cript, shiftLogic, &currChar, key);
+          if(isalpha(currChar)) criptografarCaracter(crypt, shiftLogic, &currChar, key);
           outputFile << currChar;
       }
       outputFile.close();
@@ -103,8 +103,8 @@ void menu(){
   char diretorioArquivoEntrada[TAM_DIRNAME] = INPUT_DIR;
   char nomeArquivo[TAM_FILENAME];
   int criptografar, apagarOriginal=false, logicaCesar=true;
-  unsigned short chave; /* lógica de deslocamento. */
-  char chave2;          /* lógica da Cifra de César. */
+  unsigned short chave; /* logica de deslocamento. */
+  char chave2;          /* logica da Cifra de Cesar. */
 
   cout << endl << ">> Nome do arquivo a ser criptografado em " << INPUT_DIR;
   readString(nomeArquivo, TAM_FILENAME);
