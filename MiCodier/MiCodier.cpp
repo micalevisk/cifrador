@@ -25,7 +25,7 @@ using namespace std;
 
 //////////////////FUNCTIONS/////////////////////////////////////////////////////////////////////////////
 void readString(char stringVar[], int tamanho);
-void criptografarCaracter(bool criptografar, bool logicaCesar, char* caractere, unsigned short chave);
+void codificarCaractere(char* caractere, bool logicaCesar, bool criptografar, unsigned short chave);
 void process(char fileDir[], bool crypt, bool shiftLogic, bool delOriginal, unsigned short key);
 void menu(void);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ void readString(char stringVar[], int tamanho) {
 }
 
 
-void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* caractere, unsigned short chave){
+void codificarCaractere(char* caractere, bool logicaDeslocamento, bool criptografar, unsigned short chave){
   int charCript;
   char currChar = *caractere;
   short limiteTeto, limiteChao;
@@ -64,7 +64,8 @@ void criptografarCaracter(bool criptografar, bool logicaDeslocamento, char* cara
 
   if(criptografar){
       charCript = currChar + chave;
-      while(charCript > limiteTeto) charCript -= 26;
+      // while(charCript > limiteTeto) charCript -= 26;
+	  charCript = (( charCript + 65 )%26 ) + 65; // incremento circular.
   }
   else{
       charCript = currChar - chave;
@@ -84,7 +85,7 @@ void process(char fileDir[], bool crypt, bool shiftLogic, bool delOriginal, unsi
       outputFile.open(OUTPUT_DIR);
 
       while(inputFile >> noskipws >> currChar){
-          if(isalpha(currChar)) criptografarCaracter(crypt, shiftLogic, &currChar, key);
+          if(isalpha(currChar)) codificarCaractere(&currChar, shiftLogic, crypt, key);
           outputFile << currChar;
       }
       outputFile.close();

@@ -1,7 +1,7 @@
 <!--
 algoritmos.md
-Created by Micael Levi on 02/03/2016.
-Copyright (c) 2016 Micael Levi L. Cavalcante. All rights reserved
+Created by Micael Levi on 02/03/2016 (update: 05/27/2016).
+Copyright (c) 2016 Micael Levi L. Cavalcante. All rights reserved.
 -->
 
 Programa de criptografia simples que funciona com os princípios da criptografia "Cifra de César". <br>
@@ -16,8 +16,9 @@ i.e., 26 letras.
 1. Enquanto existirem caracteres a serem lidos, seguir;
 2. Ler 1 caractere do texto (a ser criptografado) para CH;
 3. Se CH for um caractere alfabético, seguir. Caso contrário, voltar para _[1]_;
-4. __f(X) = CH + X__;
+4. __f(X) = Y = CH + X__;
 5. Enquanto Y for maior que o maior valor representável (90/122), fazer __Y = Y - 26__;
+5. __Y = (( Y + 65 ) % 26) + 65__;
 6. __CH = Y__;
 7. Voltar para _[1]_;
 
@@ -26,7 +27,7 @@ i.e., 26 letras.
 1. Enquanto existirem caracteres a serem lidos, seguir;
 2. Ler 1 caractere do texto (a ser descriptografado) para CH;
 3. Se CH for um caractere alfabético, seguir. Caso contrário, voltar para _[1]_;
-4. __g(X) = CH - X__;
-5. Enquanto Y for menor que o menor valor representável (65/97), fazer __Y = Y + 26__;
-6. __CH = Y__;
+4. __g(X) = Z = CH - X__;
+5. Enquanto Z for menor que o menor valor representável (65/97), fazer __Z = Z + 26__;
+6. __CH = Z__;
 7. Voltar para _[1]_;
